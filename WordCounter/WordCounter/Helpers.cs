@@ -23,10 +23,11 @@ namespace WordCounter
             // the number of times that index is greater than the character count
             var rounds = index / charactersCount;
 
-            // this is the index as of the character count. I mean, the index can only go from 'a' to 'z', even if the number is bigger than 26.
-            // What we do is to multiple this character N times so it appears exactly like the challenge description
+            // this is the string index, not repeated. I mean, the string index can only go from 'a' to 'z', even if the number is bigger than 26.
+            // What we do is to repeat this character N times so it appears exactly like the challenge description
             var baseIndex = index % charactersCount;
 
+            // the string class has an unknown constructor parameter that is the number of times a character should be repeated
             return new string((char) (aCharacterIndex + baseIndex), rounds + 1) + '.';
         } 
     }

@@ -72,7 +72,7 @@ namespace WordCounter
             {
                 var word = wordPair.Key;
                 var wordData = wordPair.Value;
-                Console.WriteLine(string.Format("{0, -6} {1, -20} {2}", Helpers.ConvertNumericIndexToStringIndex(index), word, wordData ));
+                Console.WriteLine(string.Format("{0, -20} {1, -20} {2}", Helpers.ConvertNumericIndexToStringIndex(index), word, wordData ));
                 index++;
             }
 
@@ -100,7 +100,7 @@ namespace WordCounter
                     WordData wordData;
 
                     // the challenge description seems to be case insensitive, so we're assuming it's case insensitive.
-                    var word = currentWordBuilder.ToString().ToLower();
+                    var word = currentWordBuilder.ToString();
                     if (words.ContainsKey(word))
                     {
                         // in this case, the current word has been found already. Let's just update it.
@@ -136,7 +136,7 @@ namespace WordCounter
                     if (char.IsLetterOrDigit(character) || allowedSpecialCharacters.Contains(character))
                     {
                         // we only append a character to the current word if it's allowed
-                        currentWordBuilder.Append(character);
+                        currentWordBuilder.Append(char.ToLower(character));
                     }
                 }
             }
