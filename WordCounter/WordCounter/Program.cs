@@ -83,12 +83,7 @@ namespace WordCounter
 
             Console.ReadKey(false);
         }
-
-
-
-
-
-
+        
         private static void CountWords(StreamReader streamReader, char[] wordBreakers, StringBuilder currentWordBuilder,
             IDictionary<string, WordData> words, int currentSentenceIndex, int wordsInTheCurrentSentence, char[] sentenceBreakers,
             char[] allowedSpecialCharacters)
@@ -129,9 +124,10 @@ namespace WordCounter
                     // we *probably* found a complete sentence. Needs further investigation.
                     if (wordsInTheCurrentSentence > 0)
                     {
-                        // if currentSentenceIndex is 0 and we found a new sentence breaker, that means there were multiple word breakers sequentially.
+                        // if wordsInTheCurrentSentence is 0 and we found a new sentence breaker, that means there were multiple word breakers sequentially.
                         // In this case, we don't want to increment currentSentenceIndex
                         currentSentenceIndex++;
+                        wordsInTheCurrentSentence = 0;
                     }
                 }
                 else
