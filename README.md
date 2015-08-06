@@ -37,5 +37,7 @@ Time needed to complete
 
 `WordCounter` took me 5 hours to complete, not considering this documentation.
 
+Contact me
+---
 
-
+You can reach me out at andrerpena@gmail.com
