@@ -16,7 +16,16 @@ In order to run the program, open the  [WordCounter.sln](https://github.com/andr
 
 If you are running from Visual Studio, right click the `WordCounter` project on the solution, click `Debug` and add the fullname of the file you want to analyze on the `Command line arguments` input. If you are running from the command line, just pass the same fullname as the first argument.
 
+About the program
+---
 
+`WordCounter` is focused on performance, so...
+
+ - If does not completely load the target file in memory. Therefore, it should work with files that are greater than the available memory in the system.
+ - It iterate through each character of the file only once.
+ - It outputs the total number of milliseconds it took to run. I'd be curious to see a solution that is way faster than this while keeping the same features.
+ - 
+ 
 
 
 
