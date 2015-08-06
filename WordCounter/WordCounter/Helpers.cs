@@ -17,7 +17,9 @@ namespace WordCounter
             // starting from 27, this should return strings from 'aa' to 'zz', and so forth, for every 26 indexes.
             // that is, for every 26 numbers, it should increase the number of characters.
 
+            // number of characters from 'a' to 'z'
             const int charactersCount = 26;
+            // the numeric value for 'a'
             const int aCharacterIndex = 97;
 
             // the number of times that index is greater than the character count
