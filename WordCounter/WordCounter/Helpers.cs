@@ -3,6 +3,9 @@ using System.Text;
 
 namespace WordCounter
 {
+    /// <summary>
+    /// General helpers
+    /// </summary>
     public class Helpers
     {
         /// <summary>
