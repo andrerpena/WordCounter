@@ -23,7 +23,7 @@ namespace WordCounter
             if (streamReader == null) throw new ArgumentNullException("streamReader");
 
             // these are the characters that, besides letters and digits, are allowed to constitute a word
-            char[] allowedSpecialCharacters = { '/', '\\', '*', '+', '-', '@', '&', '$', '%' };
+            char[] allowedSpecialCharacters = { '/', '\\', '*', '+', '-', '@', '&', '$', '%', '#' };
 
             // what we're considering to be sentence-breakers
             char[] sentenceBreakers = { '.', '!', '?', '\r', '\n' };
@@ -31,8 +31,11 @@ namespace WordCounter
             // what we're considering to be word-breakers
             char[] wordOnlyBreakers = { ' ', ',', ':', ';' };
 
-            // the "final" word breaker list contain both "sentenceBreakers" and "wordOnlyBreakers"
-            // .NET doesn't provide any straight forward way of copying arrays without using  ToList() and Contact()
+            // what we're considering to be a numeric symbol. These characters, when having adjoining numbers will not break the word nor the sentence
+            char[] numericSymbols = {'.', ','};
+
+            // the "final" word breaker list contains both "sentenceBreakers" and "wordOnlyBreakers"
+            // .NET doesn't provide any straight forward way of copying arrays without using  ToList() and Concat()
             // For the sake of performance, let's copy them the old fashion way :)
             char[] wordBreakers = new char[sentenceBreakers.Length + wordOnlyBreakers.Length];
             sentenceBreakers.CopyTo(wordBreakers, 0);
@@ -54,6 +57,7 @@ namespace WordCounter
 
             while (streamReader.Peek() >= 0)
             {
+                // the current character
                 var character = (char)streamReader.Read();
 
                 if (!wordBreakers.Contains(character))
@@ -69,6 +73,19 @@ namespace WordCounter
                 if (wordBreakers.Contains(character) || streamReader.Peek() == -1)
                 {
                     // if the current character is a word breaker OR it's the end of the stream. End of stream should count as a word breaker too
+                    
+                    if ((currentWordBuilder.Length > 0 && numericSymbols.Contains(character) && streamReader.Peek() >= 0 &&
+                         char.IsDigit(currentWordBuilder[currentWordBuilder.Length - 1]) &&
+                         char.IsDigit((char) streamReader.Peek())))
+                    {
+                        // this is *BASIC* support for numbers.
+                        // what we do is to consider 2 digits separated by '.' or ',' to be part of the same word. We don't consider it to be a sentence or a word breaker
+                        // no validation on the number is performed
+                        
+                        currentWordBuilder.Append(character);
+                        // we have to continue because otherwise the '.' or ',' will be processed as a word or sentence breaker
+                        continue;
+                    }
 
                     if (currentWordBuilder.Length > 0)
                     {

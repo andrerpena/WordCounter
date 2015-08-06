@@ -23,9 +23,10 @@ namespace WordCounter
         static void GlobalExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(e.ExceptionObject.ToString());
+            Console.WriteLine(((Exception)e.ExceptionObject).Message);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Press Enter to continue");
-            Console.ReadLine();
+            Console.ReadKey(false);
             Environment.Exit(1);
         }
 

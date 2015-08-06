@@ -84,5 +84,37 @@ He sure is"));
 
             this.TestTheStrongManPhrase(words);
         }
+
+        [TestMethod]
+        public void Process_NumberBasic()
+        {
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes(@"I have 2 computers"));
+            var words = WordProcessor.Process(new StreamReader(stream));
+            Assert.IsTrue(words.ContainsKey("2"));
+        }
+
+        [TestMethod]
+        public void Process_NumberPercentage()
+        {
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes(@"76.34% of people did not pass"));
+            var words = WordProcessor.Process(new StreamReader(stream));
+            Assert.IsTrue(words.ContainsKey("76.34%"));
+        }
+
+        [TestMethod]
+        public void Process_NumberBigNumberNumericFormat()
+        {
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes(@"Their revenue was 2,000,000.00 this month"));
+            var words = WordProcessor.Process(new StreamReader(stream));
+            Assert.IsTrue(words.ContainsKey("2,000,000.00"));
+        }
+
+        [TestMethod]
+        public void Process_NumberBigNumberNumericFormatBrazillianLocale()
+        {
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes(@"Their revenue was 2.000.000,00 this month"));
+            var words = WordProcessor.Process(new StreamReader(stream));
+            Assert.IsTrue(words.ContainsKey("2.000.000,00"));
+        }
     }
 }
