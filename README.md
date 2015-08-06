@@ -23,9 +23,19 @@ About the program
 
  - If does not completely load the target file in memory. Therefore, it should work with files that are greater than the available memory in the system.
  - It iterate through each character of the file only once.
- - It outputs the total number of milliseconds it took to run. I'd be curious to see a solution that is way faster than this while keeping the same features.
- - 
- 
+ - It outputs the total number of milliseconds it took to run.
+
+`Wordcounter` has basic support for numbers. The characters `.` and `,` are not considered sentence or word breakers if they have adjoining digits. There's no validation for numbers whatsoever.
+
+Unit tests
+---
+
+I've made basic unit tests, they can be found [here](https://github.com/andrerpena/WordCounter/tree/master/WordCounter/UnitTests). I've tested basic edge cases. It's not complete, but works well enough for what I intended to do.
+
+Time needed to complete
+---
+
+`WordCounter` took me 5 hours to complete, not considering this documentation.
 
 
 
