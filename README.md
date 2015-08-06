@@ -1,7 +1,7 @@
-Bridgewater challenge: Concordance
+Wordcounter challenge
 ===
 
-My name is `Andre Pena`. This is my Bridgewater challenge resolution for the `Concordance` problem. The objective is to count occurrences of words on a text file.
+This is a program that counts occurrences of words in a text file.
 
 The project is also available on [GitHub](https://github.com/andrerpena/WordCounter).
 
